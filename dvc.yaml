@@ -1,0 +1,26 @@
+stages:
+  process_data:
+    cmd: python MLFLOW_PROJECT/data_loader.py
+    deps:
+      - MLFLOW_PROJECT/data_loader.py
+    outs:
+      - data/processed/X_train.csv
+      - data/processed/X_test.csv
+      - data/processed/y_train.csv
+      - data/processed/y_test.csv
+      - models/scaler.joblib
+      - data/processed/feature_info.joblib
+
+  train_models:
+    cmd: python MLFLOW_PROJECT/train_model.py
+    deps:
+      - MLFLOW_PROJECT/train_model.py
+      - data/processed/X_train.csv
+      - data/processed/X_test.csv
+      - data/processed/y_train.csv
+      - data/processed/y_test.csv
+    outs:
+      - models/random_forest_model.joblib
+      - models/svm_model.joblib
+      - confusion_matrix_rf.png
+      - confusion_matrix_svm.png
