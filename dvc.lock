@@ -1,0 +1,74 @@
+schema: '2.0'
+stages:
+  process_data:
+    cmd: python MLFLOW_PROJECT/data_loader.py
+    deps:
+    - path: MLFLOW_PROJECT/data_loader.py
+      hash: md5
+      md5: 1e94deab45d72456f6291846d4bee0a8
+      size: 7222
+    outs:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 5e1065644ed90bab081ccb83b5c73322
+      size: 97240
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: 076aa76e3966faba53f7f95d1c89816d
+      size: 387160
+    - path: data/processed/feature_info.joblib
+      hash: md5
+      md5: f305f2b4cc5bf98c6359a32eed1b4946
+      size: 438
+    - path: data/processed/y_test.csv
+      hash: md5
+      md5: b81c47ab945fce9e8c1e2c3473855e9a
+      size: 552
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: b59308056763b6170c505320284c9351
+      size: 2182
+    - path: models/scaler.joblib
+      hash: md5
+      md5: bdc49910b3f631d5185673a6066519cd
+      size: 1591
+  train_models:
+    cmd: python MLFLOW_PROJECT/train_model.py
+    deps:
+    - path: MLFLOW_PROJECT/train_model.py
+      hash: md5
+      md5: 03d9f70c3286269327dffe7396340e45
+      size: 8350
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 5e1065644ed90bab081ccb83b5c73322
+      size: 97240
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: 076aa76e3966faba53f7f95d1c89816d
+      size: 387160
+    - path: data/processed/y_test.csv
+      hash: md5
+      md5: b81c47ab945fce9e8c1e2c3473855e9a
+      size: 552
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: b59308056763b6170c505320284c9351
+      size: 2182
+    outs:
+    - path: confusion_matrix_rf.png
+      hash: md5
+      md5: e7b55c4a69e5fe9fe4b01426f62c6bcf
+      size: 27623
+    - path: confusion_matrix_svm.png
+      hash: md5
+      md5: 84d2ea99cb4fa5230a20c7a8e59a164d
+      size: 26392
+    - path: models/random_forest_model.joblib
+      hash: md5
+      md5: 743fbd7fce02e061f0c27b432c938a99
+      size: 3631465
+    - path: models/svm_model.joblib
+      hash: md5
+      md5: e17f799723a3e91469c4b789e3c205bd
+      size: 215091
